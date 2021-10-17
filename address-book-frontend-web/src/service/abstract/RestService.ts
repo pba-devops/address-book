@@ -5,7 +5,7 @@ export abstract class RestService {
     protected constructor() {
     }
 
-    protected getWithoutBody(endpoint: string, callback: Function) {
+    protected get(endpoint: string, callback: Function) {
 
         const requestOption = {
             method: 'GET',
@@ -17,10 +17,23 @@ export abstract class RestService {
             .catch(console.log);
     }
 
-    protected getWithBody(endpoint: string, data: Stringifiable, callback: Function) {
+    protected put(endpoint: string, data: Stringifiable, callback: Function) {
 
         const requestOption = {
-            method: 'GET',
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: data.stringify()
+        };
+        fetch(endpoint, requestOption)
+            .then(async res => await res.json())
+            .then(data => callback(data))
+            .catch(console.log);
+    }
+
+    protected POST(endpoint: string, data: Stringifiable, callback: Function) {
+
+        const requestOption = {
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: data.stringify()
         };
