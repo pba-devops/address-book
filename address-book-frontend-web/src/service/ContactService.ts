@@ -10,7 +10,7 @@ export class ContactService extends RestService {
 
     getAllContact(callback: Function): void {
 
-        super.getWithoutBody(ContactService.ENDPOINT_GET_ALL_CONTACTS,
+        super.get(ContactService.ENDPOINT_GET_ALL_CONTACTS,
             async (promise: Promise<any[]>) => {
                 const objects = await Promise.resolve(promise);
                 callback(objects);
